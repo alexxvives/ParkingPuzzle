@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Parking Puzzle",
+    "slug": "parking-puzzle",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#2E9BFF",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourcompany.parkingpuzzle"
+    },
+    "android": {
+      "package": "com.yourcompany.parkingpuzzle",
+      "adaptiveIcon": {
+        "backgroundColor": "#2E9BFF"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "scheme": "parkingpuzzle",
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}

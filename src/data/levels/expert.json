@@ -1,0 +1,40 @@
+[
+  {
+    "id": "expert_001",
+    "title": "Master Challenge",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 0, "y": 2 },
+      { "id": "A", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 0 },
+      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 1, "y": 3 },
+      { "id": "C", "type": "car", "orientation": "H", "length": 2, "x": 2, "y": 0 },
+      { "id": "D", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 1 },
+      { "id": "E", "type": "truck", "orientation": "H", "length": 3, "x": 3, "y": 3 },
+      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 3, "y": 4 },
+      { "id": "G", "type": "car", "orientation": "H", "length": 2, "x": 4, "y": 0 },
+      { "id": "H", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 1 },
+      { "id": "I", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 4 }
+    ],
+    "optimalMoves": 25
+  },
+  {
+    "id": "expert_002",
+    "title": "Ultimate Puzzle",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 1, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 0, "y": 0 },
+      { "id": "B", "type": "car", "orientation": "H", "length": 2, "x": 1, "y": 0 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 1, "y": 4 },
+      { "id": "D", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 3 },
+      { "id": "E", "type": "truck", "orientation": "V", "length": 3, "x": 3, "y": 0 },
+      { "id": "F", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 5 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 3 },
+      { "id": "H", "type": "car", "orientation": "H", "length": 2, "x": 4, "y": 1 },
+      { "id": "I", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 3 }
+    ],
+    "optimalMoves": 30
+  }
+]

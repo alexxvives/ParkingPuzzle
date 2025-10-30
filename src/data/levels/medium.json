@@ -1,0 +1,47 @@
+[
+  {
+    "id": "medium_001",
+    "title": "Traffic Jam",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 1, "y": 2 },
+      { "id": "A", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 0 },
+      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 3, "y": 0 },
+      { "id": "C", "type": "car", "orientation": "H", "length": 2, "x": 0, "y": 4 },
+      { "id": "D", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 5 },
+      { "id": "E", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 0 }
+    ],
+    "optimalMoves": 8
+  },
+  {
+    "id": "medium_002",
+    "title": "Rush Hour",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 0, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 2, "y": 0 },
+      { "id": "B", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 1 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 2 },
+      { "id": "D", "type": "car", "orientation": "H", "length": 2, "x": 0, "y": 4 },
+      { "id": "E", "type": "car", "orientation": "V", "length": 2, "x": 1, "y": 3 }
+    ],
+    "optimalMoves": 10
+  },
+  {
+    "id": "medium_003",
+    "title": "Blocked Path",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 2, "y": 2 },
+      { "id": "A", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 1 },
+      { "id": "B", "type": "car", "orientation": "V", "length": 2, "x": 1, "y": 0 },
+      { "id": "C", "type": "truck", "orientation": "V", "length": 3, "x": 4, "y": 0 },
+      { "id": "D", "type": "car", "orientation": "H", "length": 2, "x": 2, "y": 4 },
+      { "id": "E", "type": "car", "orientation": "V", "length": 2, "x": 3, "y": 3 }
+    ],
+    "optimalMoves": 9
+  }
+]

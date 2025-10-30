@@ -1,0 +1,36 @@
+[
+  {
+    "id": "hard_001",
+    "title": "Gridlock",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 0, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 2, "y": 0 },
+      { "id": "B", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 1 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 3, "y": 2 },
+      { "id": "D", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 3 },
+      { "id": "E", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 3 },
+      { "id": "F", "type": "car", "orientation": "H", "length": 2, "x": 0, "y": 5 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 0 }
+    ],
+    "optimalMoves": 15
+  },
+  {
+    "id": "hard_002",
+    "title": "Parking Chaos",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 1, "y": 2 },
+      { "id": "A", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 0 },
+      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 1, "y": 3 },
+      { "id": "C", "type": "car", "orientation": "H", "length": 2, "x": 2, "y": 1 },
+      { "id": "D", "type": "car", "orientation": "V", "length": 2, "x": 3, "y": 0 },
+      { "id": "E", "type": "truck", "orientation": "H", "length": 3, "x": 2, "y": 4 },
+      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 2 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 4 }
+    ],
+    "optimalMoves": 18
+  }
+]
