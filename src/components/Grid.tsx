@@ -21,6 +21,7 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
   const borderWidth = mmToDp(1.8);
   const exitLineLength = Math.max(12, Math.round(cellSize * 0.35));
   const exitLineThickness = Math.max(2, Math.round(borderWidth * 0.3));
+  const exitLineYOffset = Math.round(cellSize * 0.1);
 
   return (
     <View
@@ -56,7 +57,7 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
             style={{
               position: 'absolute',
               right: -exitLineLength,
-              top: borderWidth + exitY * cellSize - Math.round(exitLineThickness / 2),
+              top: borderWidth + exitY * cellSize - Math.round(exitLineThickness / 2) - exitLineYOffset,
               width: exitLineLength,
               height: exitLineThickness,
               backgroundColor: BRAND_BLUE,
@@ -68,7 +69,7 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
             style={{
               position: 'absolute',
               right: -exitLineLength,
-              top: borderWidth + (exitY + 1) * cellSize - Math.round(exitLineThickness / 2),
+              top: borderWidth + (exitY + 1) * cellSize - Math.round(exitLineThickness / 2) - exitLineYOffset,
               width: exitLineLength,
               height: exitLineThickness,
               backgroundColor: BRAND_BLUE,
