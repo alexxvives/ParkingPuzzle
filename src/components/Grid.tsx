@@ -19,8 +19,9 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
   const mmToDp = (mm: number) => Math.round((mm / 25.4) * 160);
   // Requested: 10% thinner than 2 mm => 1.8 mm border width
   const borderWidth = mmToDp(1.8);
-  const exitLineLength = Math.max(12, Math.round(cellSize * 0.35));
+  const baseLineLength = Math.max(12, Math.round(cellSize * 0.35));
   const exitLineThickness = mmToDp(1.8); // exact requested thickness
+  const exitLineLength = baseLineLength + mmToDp(1); // extend 1mm further to the left
   const cornerRadius = 16;
 
   return (
@@ -70,7 +71,8 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
             style={{
               position: 'absolute',
               right: -exitLineLength,
-              top: borderWidth + exitY * cellSize - Math.round(exitLineThickness / 2),
+              // Top line: bottom edge aligned with top edge of exit cell border
+              top: borderWidth + exitY * cellSize - exitLineThickness,
               width: exitLineLength,
               height: exitLineThickness,
               backgroundColor: BRAND_BLUE,
@@ -82,7 +84,8 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
             style={{
               position: 'absolute',
               right: -exitLineLength,
-              top: borderWidth + (exitY + 1) * cellSize - Math.round(exitLineThickness / 2),
+              // Bottom line: top edge aligned with bottom edge of exit cell border
+              top: borderWidth + (exitY + 1) * cellSize,
               width: exitLineLength,
               height: exitLineThickness,
               backgroundColor: BRAND_BLUE,
