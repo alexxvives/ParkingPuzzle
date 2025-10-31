@@ -1,36 +1,97 @@
 ﻿[
   {
     "id": "hard_001",
-    "title": "Gridlock",
-    "size": 10,
-    "exit": { "x": 9, "y": 4 },
+    "title": "Barrier Trio",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
     "vehicles": [
-      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 1, "y": 4 },
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 1, "y": 2 },
       { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 3, "y": 0 },
-      { "id": "B", "type": "car", "orientation": "H", "length": 2, "x": 4, "y": 2 },
-      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 4 },
-      { "id": "D", "type": "truck", "orientation": "H", "length": 3, "x": 1, "y": 5 },
-      { "id": "E", "type": "car", "orientation": "V", "length": 2, "x": 6, "y": 5 },
-      { "id": "F", "type": "car", "orientation": "H", "length": 2, "x": 1, "y": 8 },
-      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 8, "y": 0 }
+      { "id": "B", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 2 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 2 },
+      { "id": "D", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 0 },
+      { "id": "E", "type": "car", "orientation": "H", "length": 2, "x": 0, "y": 4 },
+      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 0 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 3 },
+      { "id": "H", "type": "car", "orientation": "V", "length": 2, "x": 1, "y": 4 },
+      { "id": "I", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 5 }
     ],
-    "optimalMoves": 15
+    "optimalMoves": 18
   },
   {
     "id": "hard_002",
-    "title": "Parking Chaos",
-    "size": 10,
-    "exit": { "x": 9, "y": 4 },
+    "title": "Column Cascade",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
     "vehicles": [
-      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 2, "y": 4 },
-      { "id": "A", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 1 },
-      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 2, "y": 5 },
-      { "id": "C", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 2 },
-      { "id": "D", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 0 },
-      { "id": "E", "type": "truck", "orientation": "H", "length": 3, "x": 3, "y": 6 },
-      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 6, "y": 4 },
-      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 8, "y": 6 }
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 0, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 4, "y": 0 },
+      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 5, "y": 0 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 3, "y": 2 },
+      { "id": "D", "type": "car", "orientation": "H", "length": 2, "x": 0, "y": 0 },
+      { "id": "E", "type": "car", "orientation": "H", "length": 2, "x": 2, "y": 0 },
+      { "id": "F", "type": "car", "orientation": "H", "length": 2, "x": 1, "y": 4 },
+      { "id": "G", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 5 },
+      { "id": "H", "type": "car", "orientation": "V", "length": 2, "x": 1, "y": 3 },
+      { "id": "I", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 3 }
     ],
-    "optimalMoves": 18
+    "optimalMoves": 20
+  },
+  {
+    "id": "hard_003",
+    "title": "Staggered Walls",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 2, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 3, "y": 0 },
+      { "id": "B", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 1 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 2 },
+      { "id": "D", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 4 },
+      { "id": "E", "type": "car", "orientation": "H", "length": 2, "x": 0, "y": 0 },
+      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 0 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 1, "y": 3 },
+      { "id": "H", "type": "car", "orientation": "H", "length": 2, "x": 2, "y": 5 },
+      { "id": "I", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 2 }
+    ],
+    "optimalMoves": 19
+  },
+  {
+    "id": "hard_004",
+    "title": "Tight Ladder",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 1, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 4, "y": 0 },
+      { "id": "B", "type": "car", "orientation": "V", "length": 2, "x": 3, "y": 2 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 1 },
+      { "id": "D", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 0 },
+      { "id": "E", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 5 },
+      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 0 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 3 },
+      { "id": "H", "type": "car", "orientation": "H", "length": 2, "x": 2, "y": 4 },
+      { "id": "I", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 2 }
+    ],
+    "optimalMoves": 21
+  },
+  {
+    "id": "hard_005",
+    "title": "Block and Slide",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 0, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 3, "y": 0 },
+      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 5, "y": 0 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 2 },
+      { "id": "D", "type": "car", "orientation": "H", "length": 2, "x": 0, "y": 0 },
+      { "id": "E", "type": "car", "orientation": "H", "length": 2, "x": 1, "y": 4 },
+      { "id": "F", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 5 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 1 },
+      { "id": "H", "type": "car", "orientation": "V", "length": 2, "x": 1, "y": 3 },
+      { "id": "I", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 3 }
+    ],
+    "optimalMoves": 22
   }
 ]

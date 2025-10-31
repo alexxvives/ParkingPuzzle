@@ -1,40 +1,102 @@
 ﻿[
   {
     "id": "expert_001",
-    "title": "Master Challenge",
-    "size": 12,
-    "exit": { "x": 11, "y": 5 },
+    "title": "Lockstep",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
     "vehicles": [
-      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 1, "y": 5 },
-      { "id": "A", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 1 },
-      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 2, "y": 6 },
-      { "id": "C", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 1 },
-      { "id": "D", "type": "car", "orientation": "V", "length": 2, "x": 3, "y": 2 },
-      { "id": "E", "type": "truck", "orientation": "H", "length": 3, "x": 5, "y": 5 },
-      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 7 },
-      { "id": "G", "type": "car", "orientation": "H", "length": 2, "x": 6, "y": 1 },
-      { "id": "H", "type": "car", "orientation": "V", "length": 2, "x": 7, "y": 2 },
-      { "id": "I", "type": "car", "orientation": "V", "length": 2, "x": 9, "y": 7 }
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 1, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 3, "y": 0 },
+      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 4, "y": 0 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 2 },
+      { "id": "D", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 0 },
+      { "id": "E", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 5 },
+      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 0 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 3 },
+      { "id": "H", "type": "car", "orientation": "H", "length": 2, "x": 1, "y": 4 },
+      { "id": "I", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 5 },
+      { "id": "J", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 2 }
     ],
-    "optimalMoves": 25
+    "optimalMoves": 28
   },
   {
     "id": "expert_002",
-    "title": "Ultimate Puzzle",
-    "size": 12,
-    "exit": { "x": 11, "y": 5 },
+    "title": "Grid Weave",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
     "vehicles": [
-      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 2, "y": 5 },
-      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 0, "y": 1 },
-      { "id": "B", "type": "car", "orientation": "H", "length": 2, "x": 2, "y": 1 },
-      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 7 },
-      { "id": "D", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 6 },
-      { "id": "E", "type": "truck", "orientation": "V", "length": 3, "x": 6, "y": 0 },
-      { "id": "F", "type": "car", "orientation": "H", "length": 2, "x": 6, "y": 9 },
-      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 8, "y": 6 },
-      { "id": "H", "type": "car", "orientation": "H", "length": 2, "x": 8, "y": 2 },
-      { "id": "I", "type": "car", "orientation": "V", "length": 2, "x": 10, "y": 6 }
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 0, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 3, "y": 0 },
+      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 5, "y": 0 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 4, "y": 1 },
+      { "id": "D", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 0 },
+      { "id": "E", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 5 },
+      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 0 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 3 },
+      { "id": "H", "type": "car", "orientation": "H", "length": 2, "x": 1, "y": 4 },
+      { "id": "I", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 5 },
+      { "id": "J", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 3 }
     ],
     "optimalMoves": 30
+  },
+  {
+    "id": "expert_003",
+    "title": "Zigzag Exit",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 2, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 4, "y": 0 },
+      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 3, "y": 0 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 1 },
+      { "id": "D", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 4 },
+      { "id": "E", "type": "car", "orientation": "H", "length": 2, "x": 0, "y": 0 },
+      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 0 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 1, "y": 3 },
+      { "id": "H", "type": "car", "orientation": "H", "length": 2, "x": 2, "y": 5 },
+      { "id": "I", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 2 },
+      { "id": "J", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 5 }
+    ],
+    "optimalMoves": 31
+  },
+  {
+    "id": "expert_004",
+    "title": "Caged Lane",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 1, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 4, "y": 0 },
+      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 5, "y": 0 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 3, "y": 1 },
+      { "id": "D", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 0 },
+      { "id": "E", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 5 },
+      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 0 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 3 },
+      { "id": "H", "type": "car", "orientation": "H", "length": 2, "x": 1, "y": 4 },
+      { "id": "I", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 5 },
+      { "id": "J", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 2 }
+    ],
+    "optimalMoves": 32
+  },
+  {
+    "id": "expert_005",
+    "title": "Final Cut",
+    "size": 6,
+    "exit": { "x": 5, "y": 2 },
+    "vehicles": [
+      { "id": "R", "type": "red", "orientation": "H", "length": 2, "x": 0, "y": 2 },
+      { "id": "A", "type": "truck", "orientation": "V", "length": 3, "x": 3, "y": 0 },
+      { "id": "B", "type": "truck", "orientation": "V", "length": 3, "x": 4, "y": 0 },
+      { "id": "C", "type": "car", "orientation": "V", "length": 2, "x": 5, "y": 2 },
+      { "id": "D", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 0 },
+      { "id": "E", "type": "truck", "orientation": "H", "length": 3, "x": 0, "y": 5 },
+      { "id": "F", "type": "car", "orientation": "V", "length": 2, "x": 2, "y": 1 },
+      { "id": "G", "type": "car", "orientation": "V", "length": 2, "x": 1, "y": 3 },
+      { "id": "H", "type": "car", "orientation": "H", "length": 2, "x": 1, "y": 4 },
+      { "id": "I", "type": "car", "orientation": "H", "length": 2, "x": 3, "y": 5 },
+      { "id": "J", "type": "car", "orientation": "V", "length": 2, "x": 0, "y": 3 }
+    ],
+    "optimalMoves": 34
   }
 ]
