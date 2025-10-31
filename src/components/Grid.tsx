@@ -19,9 +19,6 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
   const mmToDp = (mm: number) => Math.round((mm / 25.4) * 160);
   // Requested: 10% thinner than 2 mm => 1.8 mm border width
   const borderWidth = mmToDp(1.8);
-  const baseLineLength = Math.max(12, Math.round(cellSize * 0.35));
-  const exitLineThickness = mmToDp(1.8); // exact requested thickness
-  const exitLineLength = baseLineLength + mmToDp(1); // extend 1mm further to the left
   const cornerRadius = 16;
 
   return (
@@ -65,33 +62,7 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
             style={{ position: 'absolute', right: 0, top: borderWidth + (exitY + 1) * cellSize, width: borderWidth, height: gridSize + borderWidth * 2 - (borderWidth + (exitY + 1) * cellSize), backgroundColor: BRAND_BLUE, borderBottomRightRadius: cornerRadius }}
           />
 
-          {/* Exit guide lines aligned exactly with the grid row borders */}
-          <View
-            pointerEvents="none"
-            style={{
-              position: 'absolute',
-              right: -exitLineLength,
-              // Top line: bottom edge aligned with top edge of exit cell border
-              top: borderWidth + exitY * cellSize - exitLineThickness,
-              width: exitLineLength,
-              height: exitLineThickness,
-              backgroundColor: BRAND_BLUE,
-              borderRadius: exitLineThickness / 2,
-            }}
-          />
-          <View
-            pointerEvents="none"
-            style={{
-              position: 'absolute',
-              right: -exitLineLength,
-              // Bottom line: top edge aligned with bottom edge of exit cell border
-              top: borderWidth + (exitY + 1) * cellSize,
-              width: exitLineLength,
-              height: exitLineThickness,
-              backgroundColor: BRAND_BLUE,
-              borderRadius: exitLineThickness / 2,
-            }}
-          />
+          {/* Exit guide lines removed as requested */}
         </>
       ) : (
         // Full right border if no exitY provided
