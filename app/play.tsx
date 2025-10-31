@@ -146,18 +146,25 @@ export default function PlayScreen() {
         <View style={styles.mainContent}>
           {/* Game Board */}
           <View style={styles.gameArea}>
-          <Grid size={level.size} cellSize={cellSize} difficulty={difficulty}>
-            {vehicles.map((vehicle) => (
-              <Vehicle 
-                key={vehicle.id} 
-                vehicle={vehicle} 
-                cellSize={cellSize}
-                gridSize={level.size}
-                allVehicles={vehicles}
-                onMove={handleVehicleMove}
-              />
-            ))}
-          </Grid>
+          {(() => {
+            const redCar = vehicles.find(v => v.type === 'red');
+            const exitY = redCar ? redCar.y : undefined;
+            return (
+              <Grid size={level.size} cellSize={cellSize} difficulty={difficulty} exitY={exitY}>
+                {vehicles.map((vehicle) => (
+                  <Vehicle 
+                    key={vehicle.id} 
+                    vehicle={vehicle} 
+                    cellSize={cellSize}
+                    gridSize={level.size}
+                    allVehicles={vehicles}
+                    onMove={handleVehicleMove}
+                  />
+                ))}
+              </Grid>
+            );
+          })()}
+          
           
           {/* Stars & Moves - Positioned above grid */}
           <View style={styles.starsDisplayAboveGrid}>

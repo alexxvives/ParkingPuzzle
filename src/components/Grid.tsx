@@ -5,13 +5,14 @@ interface GridProps {
   size: number;
   cellSize?: number;
   difficulty?: 'easy' | 'medium' | 'hard' | 'expert';
+  exitY?: number; // 0-indexed row where the exit notch should appear on the right border
   children?: React.ReactNode;
 }
 
 // Color azul principal usado por las estrellas y la app
 const BRAND_BLUE = '#2E9BFF';
 
-export function Grid({ size, cellSize = 50, difficulty = 'easy', children }: GridProps) {
+export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children }: GridProps) {
   const gridSize = size * cellSize;
   
   // Convert millimeters to dp: 1 inch = 25.4 mm, baseline density = 160 dp/inch
@@ -32,6 +33,21 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', children }: Gri
         },
       ]}
     >
+      {/* Exit notch on the right border aligned to exitY row */}
+      {typeof exitY === 'number' && exitY >= 0 && exitY < size && (
+        <View
+          pointerEvents="none"
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: borderWidth + exitY * cellSize,
+            width: borderWidth,
+            height: cellSize,
+            backgroundColor: '#FFFFFF',
+          }}
+        />
+      )}
+
       {/* Grid interior blanco */}
       <View
         style={[
