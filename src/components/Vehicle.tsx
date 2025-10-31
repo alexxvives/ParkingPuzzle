@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, StyleSheet, Platform, Image } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
@@ -21,15 +21,42 @@ interface VehicleProps {
 export function Vehicle({ vehicle, cellSize, gridSize, allVehicles, onMove }: VehicleProps) {
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
+  const initialPosition = useSharedValue({ x: vehicle.x, y: vehicle.y });
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // Reset translation when vehicle position changes (after state update)
+  // BUT only if we're not the one who caused the change
   useEffect(() => {
-    translateX.value = 0;
-    translateY.value = 0;
-  }, [vehicle.x, vehicle.y]);
+    console.log(`[${vehicle.id}] useEffect triggered - vehicle.x: ${vehicle.x}, vehicle.y: ${vehicle.y}, isAnimating: ${isAnimating}`);
+    console.log(`[${vehicle.id}] Current translateX: ${translateX.value}, translateY: ${translateY.value}`);
+    console.log(`[${vehicle.id}] initialPosition: x: ${initialPosition.value.x}, y: ${initialPosition.value.y}`);
+    
+    // Always update initialPosition to match current vehicle position
+    // This handles both: animations finishing AND other vehicles moving this one
+    const needsUpdate = initialPosition.value.x !== vehicle.x || initialPosition.value.y !== vehicle.y;
+    
+    if (!isAnimating) {
+      if (needsUpdate) {
+        console.log(`[${vehicle.id}] Position changed, resetting translation and updating initialPosition`);
+        translateX.value = 0;
+        translateY.value = 0;
+        initialPosition.value = { x: vehicle.x, y: vehicle.y };
+      }
+    } else {
+      console.log(`[${vehicle.id}] Skipping reset because isAnimating is true`);
+    }
+  }, [vehicle.x, vehicle.y, isAnimating]);
 
-  const handleMoveEnd = (cellsMoved: number) => {
+  const handleMoveEnd = (cellsMoved: number, orientation: 'H' | 'V', startPos: number) => {
+    console.log(`[${vehicle.id}] handleMoveEnd called with cellsMoved: ${cellsMoved}, orientation: ${orientation}, startPos: ${startPos}`);
     onMove(vehicle.id, cellsMoved);
+    // After state update completes, reset the animation flag
+    // This will trigger useEffect to reset translations when vehicle.x/y updates
+    // Use a small delay to ensure React has processed the state update
+    setTimeout(() => {
+      console.log(`[${vehicle.id}] handleMoveEnd setTimeout executing, setting isAnimating to false`);
+      setIsAnimating(false);
+    }, 20);
   };
 
   const vehicleImages = {
@@ -62,8 +89,9 @@ export function Vehicle({ vehicle, cellSize, gridSize, allVehicles, onMove }: Ve
   const vehicleImage = getVehicleImage();
 
   // Calculate position and dimensions
-  const startX = vehicle.x * cellSize;
-  const startY = vehicle.y * cellSize;
+  // Note: base position for rendering will come from initialPosition to avoid 1-frame mismatch on drop
+  const startX = vehicle.x * cellSize; // kept for web path/debug only
+  const startY = vehicle.y * cellSize; // kept for web path/debug only
   const width = vehicle.orientation === 'H' ? vehicle.length * cellSize : cellSize;
   const height = vehicle.orientation === 'V' ? vehicle.length * cellSize : cellSize;
 
@@ -101,6 +129,18 @@ export function Vehicle({ vehicle, cellSize, gridSize, allVehicles, onMove }: Ve
   }, [allVehicles, vehicle.id, vehicle.orientation, vehicle.x, vehicle.y, vehicle.length, gridSize, cellSize]);
 
   const panGesture = Gesture.Pan()
+    .onStart(() => {
+      // Convertir a coordenadas matemáticas (origen abajo-izquierda, empezando desde 1)
+      const mathX = vehicle.x + 1;
+      const mathY = gridSize - vehicle.y;
+      const visualMathX = mathX + Math.round(translateX.value / cellSize);
+      const visualMathY = mathY - Math.round(translateY.value / cellSize);
+      
+      console.log(`[${vehicle.id}] 🚗 CLICK - Posición: (${mathX}, ${mathY}), orientación=${vehicle.orientation}, longitud=${vehicle.length}`);
+      console.log(`[${vehicle.id}] 🚗 translateX: ${translateX.value}, translateY: ${translateY.value}`);
+      console.log(`[${vehicle.id}] 🚗 Posición VISUAL: (${visualMathX}, ${visualMathY})`);
+      console.log(`[${vehicle.id}] 🚗 [DEBUG interno: x=${vehicle.x}, y=${vehicle.y}]`);
+    })
     .onUpdate((e) => {
       if (vehicle.orientation === 'H') {
         // Horizontal movement - limit by collisions and grid boundaries
@@ -114,29 +154,72 @@ export function Vehicle({ vehicle, cellSize, gridSize, allVehicles, onMove }: Ve
     })
     .onEnd(() => {
       const delta = vehicle.orientation === 'H' ? translateX.value : translateY.value;
-      const cellsMoved = Math.round(delta / cellSize);
+      
+      console.log(`[${vehicle.id}] onEnd:`);
+      console.log(`  delta: ${delta}, cellsMoved: ${Math.round(delta / cellSize)}`);
+      console.log(`  initialPos: ${vehicle.orientation === 'H' ? initialPosition.value.x : initialPosition.value.y}`);
+      console.log(`  currentPos: ${vehicle.orientation === 'H' ? vehicle.x : vehicle.y}`);
+      
+      // Calculate where we want to snap to
+      let cellsMoved = Math.round(delta / cellSize);
       let finalPosition = cellsMoved * cellSize;
+      
+      console.log(`  finalPosition (before clamp): ${finalPosition}`);
+      console.log(`  maxNegative: ${maxNegative}, maxPositive: ${maxPositive}`);
       
       // Make sure finalPosition respects collision boundaries
       finalPosition = Math.max(maxNegative, Math.min(maxPositive, finalPosition));
       
+      console.log(`  finalPosition (after clamp): ${finalPosition}`);
+      
+      // Calculate actual cells moved from initial position
+      const finalCellPosition = (vehicle.orientation === 'H' ? initialPosition.value.x : initialPosition.value.y) + Math.round(finalPosition / cellSize);
+      const actualCellsMoved = finalCellPosition - (vehicle.orientation === 'H' ? initialPosition.value.x : initialPosition.value.y);
+      
+      console.log(`  finalCellPosition: ${finalCellPosition}, actualCellsMoved: ${actualCellsMoved}`);
+      console.log(`  will call handleMoveEnd: ${actualCellsMoved !== 0}`);
+      
+      // If no actual movement, just animate back to 0
+      if (actualCellsMoved === 0) {
+        console.log(`[${vehicle.id}] No actual movement, animating back to 0`);
+        if (vehicle.orientation === 'H') {
+          translateX.value = withTiming(0, { duration: 150 });
+        } else {
+          translateY.value = withTiming(0, { duration: 150 });
+        }
+        return;
+      }
+      
       // Animate smoothly to the snapped grid position
       if (vehicle.orientation === 'H') {
+        runOnJS(setIsAnimating)(true);
+        const startPosX = initialPosition.value.x;
+        console.log(`[${vehicle.id}] Starting animation, set isAnimating = true, startPosX: ${startPosX}`);
         translateX.value = withTiming(finalPosition, { duration: 150 }, (finished) => {
-          if (finished && cellsMoved !== 0) {
-            runOnJS(handleMoveEnd)(cellsMoved);
+          if (finished) {
+            console.log(`[${vehicle.id}] Animation finished, calling handleMoveEnd with ${actualCellsMoved}`);
+            console.log(`[${vehicle.id}] Before handleMoveEnd - vehicle.x: ${vehicle.x}, translateX: ${translateX.value}`);
+            runOnJS(handleMoveEnd)(actualCellsMoved, 'H', startPosX);
           }
         });
       } else {
+        runOnJS(setIsAnimating)(true);
+        const startPosY = initialPosition.value.y;
+        console.log(`[${vehicle.id}] Starting animation, set isAnimating = true, startPosY: ${startPosY}`);
         translateY.value = withTiming(finalPosition, { duration: 150 }, (finished) => {
-          if (finished && cellsMoved !== 0) {
-            runOnJS(handleMoveEnd)(cellsMoved);
+          if (finished) {
+            console.log(`[${vehicle.id}] Animation finished, calling handleMoveEnd with ${actualCellsMoved}`);
+            console.log(`[${vehicle.id}] Before handleMoveEnd - vehicle.y: ${vehicle.y}, translateY: ${translateY.value}`);
+            runOnJS(handleMoveEnd)(actualCellsMoved, 'V', startPosY);
           }
         });
       }
     });
 
+  // Drive base position (left/top) from initialPosition to keep visual consistent during state updates
   const animatedStyle = useAnimatedStyle(() => ({
+    left: initialPosition.value.x * cellSize,
+    top: initialPosition.value.y * cellSize,
     transform: [
       { translateX: translateX.value },
       { translateY: translateY.value },
@@ -181,8 +264,6 @@ export function Vehicle({ vehicle, cellSize, gridSize, allVehicles, onMove }: Ve
           {
             width,
             height,
-            left: startX,
-            top: startY,
             backgroundColor: 'transparent',
             justifyContent: 'center',
             alignItems: 'center',
