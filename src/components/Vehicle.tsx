@@ -5,6 +5,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   runOnJS,
+  withTiming,
 } from 'react-native-reanimated';
 import type { Vehicle as VehicleType } from '../logic/types';
 import { canMove } from '../logic/moveEngine';
@@ -21,11 +22,15 @@ export function Vehicle({ vehicle, cellSize, gridSize, allVehicles, onMove }: Ve
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
 
-  // Reset translation when vehicle position changes (after successful move)
+  // Reset translation when vehicle position changes (after state update)
   useEffect(() => {
     translateX.value = 0;
     translateY.value = 0;
-  }, [vehicle.x, vehicle.y, translateX, translateY]);
+  }, [vehicle.x, vehicle.y]);
+
+  const handleMoveEnd = (cellsMoved: number) => {
+    onMove(vehicle.id, cellsMoved);
+  };
 
   const vehicleImages = {
     // Coches (length 2)
@@ -65,10 +70,6 @@ export function Vehicle({ vehicle, cellSize, gridSize, allVehicles, onMove }: Ve
   // For horizontal vehicles, we need to swap width/height for the image since we rotate it
   const imageWidth = vehicle.orientation === 'H' ? height : width;
   const imageHeight = vehicle.orientation === 'H' ? width : height;
-
-  const handleMoveEnd = (cellsMoved: number) => {
-    onMove(vehicle.id, cellsMoved);
-  };
 
   // Calculate max allowed movement in each direction considering collisions
   // Recalculate when allVehicles changes (when any vehicle moves)
@@ -114,13 +115,24 @@ export function Vehicle({ vehicle, cellSize, gridSize, allVehicles, onMove }: Ve
     .onEnd(() => {
       const delta = vehicle.orientation === 'H' ? translateX.value : translateY.value;
       const cellsMoved = Math.round(delta / cellSize);
+      let finalPosition = cellsMoved * cellSize;
       
-      if (cellsMoved !== 0) {
-        runOnJS(handleMoveEnd)(cellsMoved);
+      // Make sure finalPosition respects collision boundaries
+      finalPosition = Math.max(maxNegative, Math.min(maxPositive, finalPosition));
+      
+      // Animate smoothly to the snapped grid position
+      if (vehicle.orientation === 'H') {
+        translateX.value = withTiming(finalPosition, { duration: 150 }, (finished) => {
+          if (finished && cellsMoved !== 0) {
+            runOnJS(handleMoveEnd)(cellsMoved);
+          }
+        });
       } else {
-        // If no move was made, reset position immediately
-        translateX.value = 0;
-        translateY.value = 0;
+        translateY.value = withTiming(finalPosition, { duration: 150 }, (finished) => {
+          if (finished && cellsMoved !== 0) {
+            runOnJS(handleMoveEnd)(cellsMoved);
+          }
+        });
       }
     });
 
