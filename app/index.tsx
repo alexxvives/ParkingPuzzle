@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -6,18 +6,44 @@ import {
   Pressable,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { DailyObjectives } from '../src/components/DailyObjectives';
 import { DifficultyModal } from '../src/components/DifficultyModal';
 import { BottomTabBar } from '../src/components/BottomTabBar';
 import { TrophyIcon, SettingsIcon } from '../src/components/Icons';
 import { spacing, typography } from '../src/theme/typography';
 import { colors } from '../src/theme/colors';
+import { loadProgress, getCurrentLevelData, GameProgress } from '../src/store/progressStore';
 
 export default function HomeScreen() {
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
+  const [progress, setProgress] = useState<GameProgress | null>(null);
+
+  // Reload progress when screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      loadProgress().then(setProgress);
+    }, [])
+  );
+
+  const currentLevelData = progress ? getCurrentLevelData(progress.currentLevel) : null;
+  const difficulty = currentLevelData?.id.split('_')[0] || 'easy';
+
+  // Map difficulty to Spanish
+  const difficultyLabels = {
+    easy: 'Fácil',
+    medium: 'Medio',
+    hard: 'Difícil',
+    expert: 'Experto',
+  };
+
+  const handlePlayCurrentLevel = () => {
+    if (currentLevelData) {
+      router.push(`/play?level=${currentLevelData.id}`);
+    }
+  };
 
   const handleDifficultySelect = (difficulty: 'easy' | 'medium' | 'hard' | 'expert') => {
     // Map difficulty to first level ID
@@ -61,16 +87,34 @@ export default function HomeScreen() {
             <Text style={styles.logoSubtext}>🚗 Saca el coche rojo</Text>
           </View>
 
-          {/* New Game Button */}
+          {/* New Game Button - Dynamic Level */}
           <View style={styles.buttonContainer}>
             <Pressable
               style={({ pressed }) => [
                 styles.newGameButton,
                 pressed && styles.newGameButtonPressed,
               ]}
+              onPress={handlePlayCurrentLevel}
+            >
+              <Text style={styles.newGameButtonText}>
+                Level {progress?.currentLevel || 1}
+              </Text>
+              <Text style={styles.difficultyText}>
+                {difficultyLabels[difficulty as keyof typeof difficultyLabels]}
+              </Text>
+            </Pressable>
+
+            {/* Choose Difficulty Button */}
+            <Pressable
+              style={({ pressed }) => [
+                styles.chooseDifficultyButton,
+                pressed && styles.chooseDifficultyButtonPressed,
+              ]}
               onPress={() => setModalVisible(true)}
             >
-              <Text style={styles.newGameButtonText}>Nueva partida</Text>
+              <Text style={styles.chooseDifficultyText}>
+                Choose Difficulty
+              </Text>
             </Pressable>
           </View>
         </View>
@@ -168,5 +212,32 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: typography.xl,
     fontWeight: 'bold',
+  },
+  difficultyText: {
+    color: 'rgba(255, 255, 255, 0.8)',
+    fontSize: typography.sm,
+    fontWeight: '500',
+    marginTop: 4,
+  },
+  chooseDifficultyButton: {
+    backgroundColor: 'transparent',
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: colors.light.primary,
+    width: '100%',
+    maxWidth: 400,
+    alignItems: 'center',
+    marginTop: spacing.md,
+  },
+  chooseDifficultyButtonPressed: {
+    backgroundColor: 'rgba(46, 155, 255, 0.1)',
+    transform: [{ scale: 0.98 }],
+  },
+  chooseDifficultyText: {
+    color: colors.light.primary,
+    fontSize: typography.base,
+    fontWeight: '600',
   },
 });

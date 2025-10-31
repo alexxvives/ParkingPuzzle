@@ -1,45 +1,74 @@
 # 🚗 Parking Puzzle - Resumen del Proyecto
 
-## ✅ ¡PROYECTO COMPLETADO!
+## ✅ PROYECTO EN DESARROLLO ACTIVO
 
-Se ha creado exitosamente **Parking Puzzle**, una app móvil completa con estética minimalista inspirada en Nanogram.
+App móvil estilo Rush Hour con **estética minimalista premium** inspirada en Nonogram.com.
 
 ---
 
-## 📦 Lo que se ha implementado:
+## 🎯 Sistema de Progresión (Diseño Completo)
 
-### ✅ Configuración Base
-- ✓ Expo + React Native + TypeScript
-- ✓ expo-router para navegación
-- ✓ Configuración para iOS y Android
-- ✓ Tests con Vitest (9/9 pasando ✅)
-- ✓ TypeScript compilando sin errores ✅
+### ⭐ Sistema de Estrellas
+Cada nivel se valora según eficiencia:
+- **3 estrellas**: ≤ movimientos óptimos + 20%
+- **2 estrellas**: ≤ movimientos óptimos + 50%  
+- **1 estrella**: Completar el nivel
 
-### ✅ Lógica del Juego
+### 🧩 Puzzles Desbloqueables
+- **4 piezas por nivel** (solo con 3 estrellas)
+- **10 puzzles temáticos** (40 niveles cada uno = 400 niveles totales)
+- Orden sugerido: **Fácil → Medio → Difícil → Experto** por puzzle
+
+**Ejemplo de progresión:**
+```
+Puzzle 1 (Ciudad): 40 niveles → Al completar desbloquea Puzzle 2
+Puzzle 2 (Bosque): 40 niveles → Al completar desbloquea Puzzle 3
+...hasta 10 puzzles
+```
+
+### 🚗 Colección de Coches
+- **Coches desbloqueables** al completar puzzles
+- **6 coches base** + vehículos premium
+- Colores únicos y diseños personalizados
+
+### 🏆 Niveles Temáticos (Grid Premium)
+- **Easy (Wood)**: Grid de madera cálida (#D4A574)
+- **Medium (Bronze)**: Grid de bronce (#CD7F32)  
+- **Hard (Silver)**: Grid plateado (#C0C0C0)
+- **Expert (Gold)**: Grid dorado (#FFD700)
+
+---
+
+## 📦 Implementado (Última Actualización)
+
+### ✅ Core Mecánico
 - ✓ Motor de movimiento celda por celda (`moveEngine.ts`)
-- ✓ Validación de colisiones
-- ✓ Detección de victoria
+- ✓ **Drag & Drop real** con `gesture-handler` + `reanimated`
+- ✓ **Detección de colisiones en tiempo real** (useMemo)
+- ✓ Validación de límites del grid
 - ✓ Solver con BFS (`solver.ts`)
-- ✓ Sistema de puntuación con estrellas
+- ✓ 10 niveles en 4 dificultades
 
-### ✅ UI/UX (Estilo Nanogram)
-- ✓ Paleta de colores azul/blanco/gris claro
-- ✓ Componentes reutilizables (Button, Card, Screen, Grid, Vehicle)
-- ✓ Tema claro/oscuro
-- ✓ Bordes redondeados y sombras suaves
+### ✅ UI Premium (Nonogram Style)
+- ✓ **Themed Grids**: Wood/Bronze/Silver/Gold con gradientes
+- ✓ **StarRating Component**: Cálculo dinámico de estrellas
+- ✓ **Pantalla de Gameplay minimalista**:
+  - Back arrow SVG (circular)
+  - StarRating centrado (en tiempo real)
+  - Contador de movimientos
+  - Grid temático según dificultad
+  - Botones Restart/Check con iconos SVG
+- ✓ PNG car images (6 coches + 1 camión)
+- ✓ Rotación 90° para vehículos horizontales
+- ✓ Sin snap-back animation (movimiento fluido)
 
-### ✅ Pantallas
-- ✓ **Home**: Logo + botones Play/Levels/Settings
-- ✓ **Play**: Tablero de juego con grid 6x6 y vehículos
-- ✓ **Levels**: Selector de niveles por dificultad
-- ✓ **Settings**: Configuración básica
-
-### ✅ Contenido
-- ✓ **10 niveles** distribuidos en 4 dificultades:
-  - Easy: 3 niveles
-  - Medium: 3 niveles
-  - Hard: 2 niveles
-  - Expert: 2 niveles
+### ✅ Configuración Técnica
+- ✓ Expo SDK 54.0.21 + React Native 0.81.5
+- ✓ TypeScript 5.9.3 sin errores
+- ✓ expo-router para navegación
+- ✓ Tests con Vitest (9/9 pasando)
+- ✓ **Git**: Repo inicializado en https://github.com/alexxvives/ParkingPuzzle.git
+- ✓ iPhone 15 SafeAreaView handling
 
 ---
 
@@ -69,34 +98,32 @@ pnpm start
 | Navegación | ✅ Funcionando |
 | Tema claro/oscuro | ✅ Automático |
 | Tests | ✅ 9/9 pasando |
-| TypeScript | ✅ Sin errores |
 
 ---
 
-## 🔄 Funcionalidades Pendientes (Iteración 2)
+## 🔄 Próximas Features (Roadmap)
 
-Estas features tienen la **estructura lista** pero necesitan implementación final:
+### 🎨 UI/UX
+- [ ] **Pantalla de Victoria** con confetti (moti)
+- [ ] **Transiciones de pantalla** suaves
+- [ ] **Home screen mejorado** con Daily Objectives UI
 
-### 🎮 Interactividad
-- [ ] **Drag & Drop real** con `gesture-handler`
-  - Estructura: ✅ Grid y Vehicle listos
-  - Falta: Implementar gestos táctiles
+### 💾 Persistencia y Estado
+- [ ] **Conectar Zustand** con AsyncStorage
+- [ ] **Guardar progreso de estrellas** por nivel
+- [ ] **Sistema de puzzles desbloqueables** (4 piezas x nivel)
+- [ ] **Colección de coches** con unlock tracking
 
-### 💾 Persistencia
-- [ ] **Guardar progreso** con AsyncStorage
-  - Estructura: ✅ Zustand store definido
-  - Falta: Conectar a pantallas
+### 🎮 Gameplay
+- [ ] **10 puzzles temáticos** (400 niveles totales)
+- [ ] **Daily Challenge** con timer
+- [ ] **Sistema de hints** (usar solver existente)
+- [ ] **Achievements/Logros**
 
-### 🎨 Animaciones
-- [ ] **Transiciones suaves** con Reanimated
-  - Dependencias: ✅ Instaladas
-  - Falta: Animar movimientos
-
-### 🎁 Features Extra
-- [ ] **Hints/Ayudas** (solver ya implementado)
-- [ ] **Daily Puzzle** (estructura lista)
-- [ ] **Confetti al ganar** (moti instalado)
-- [ ] **Collections/Achievements**
+### 🎵 Polish
+- [ ] **Sound effects** (opcional)
+- [ ] **Haptic feedback** (opcional)
+- [ ] **Onboarding tutorial** (primer nivel)
 
 ---
 
@@ -105,52 +132,67 @@ Estas features tienen la **estructura lista** pero necesitan implementación fin
 ```
 ParkingPuzzle/
 ├── 📱 app/                    Pantallas (expo-router)
-│   ├── _layout.tsx           Layout con navegación
-│   ├── index.tsx             Home screen
-│   ├── play.tsx              Pantalla de juego
-│   ├── levels.tsx            Selector de niveles
+│   ├── _layout.tsx           Layout con SafeAreaProvider
+│   ├── index.tsx             Home: DailyObjectives + "Nueva partida"
+│   ├── play.tsx              Gameplay: Grid temático + Stars + Drag&Drop
+│   ├── levels.tsx            Selector de niveles (modal)
 │   └── settings.tsx          Configuración
 │
 ├── 🎯 src/
-│   ├── components/           Componentes UI reutilizables
-│   │   ├── Screen.tsx        Container principal
-│   │   ├── Button.tsx        Botón estilo Nanogram
-│   │   ├── Card.tsx          Tarjeta con sombra
-│   │   ├── Grid.tsx          Grid del juego
-│   │   └── Vehicle.tsx       Coche/camión
+│   ├── assets/               Imágenes PNG
+│   │   ├── frames/           🆕 Marcos temáticos para el grid
+│   │   │   ├── wood_frame.png    Marco de madera (Easy)
+│   │   │   ├── bronze_frame.png  Marco de bronce (Medium)
+│   │   │   ├── silver_frame.png  Marco de plata (Hard)
+│   │   │   └── gold_frame.png    Marco de oro (Expert)
+│   │   ├── Car_blue.png      Coche azul
+│   │   ├── Car_green.png     Coche verde
+│   │   ├── Car_orange.png    Coche naranja
+│   │   ├── Car_pink.png      Coche rosa
+│   │   ├── Car_red.png       Coche rojo (principal)
+│   │   ├── Car_yellow.png    Coche amarillo
+│   │   └── Truck_purple.png  Camión morado (length 3)
+│   │
+│   ├── components/           Componentes UI
+│   │   ├── Screen.tsx        Container con SafeAreaView
+│   │   ├── Button.tsx        Botón Nonogram style
+│   │   ├── Card.tsx          Tarjeta con shadow
+│   │   ├── Grid.tsx          Grid temático (wood/bronze/silver/gold) ✅
+│   │   ├── Vehicle.tsx       Drag&Drop con PNG + collision detection ✅
+│   │   └── StarRating.tsx    Estrellas dinámicas (1-3) ✅
 │   │
 │   ├── logic/                Motor del juego
-│   │   ├── types.ts          TypeScript types
-│   │   ├── moveEngine.ts     Lógica de movimiento ✅
-│   │   ├── solver.ts         BFS solver ✅
-│   │   └── scoring.ts        Sistema de estrellas
+│   │   ├── types.ts          TypeScript interfaces
+│   │   ├── moveEngine.ts     Lógica celda a celda ✅
+│   │   ├── solver.ts         BFS solver para hints ✅
+│   │   └── scoring.ts        Cálculo de estrellas
 │   │
-│   ├── theme/                Diseño Nanogram
-│   │   ├── colors.ts         Paleta azul/blanco
-│   │   └── typography.ts     Tipografía y espaciado
+│   ├── theme/                Diseño sistema
+│   │   ├── colors.ts         Paleta Nonogram (azul #2E9BFF)
+│   │   └── typography.ts     Sistema de tipografía
 │   │
 │   └── data/                 Contenido
 │       ├── index.ts          Loader de niveles
-│       └── levels/           JSON con 10 niveles
-│           ├── easy.json     3 niveles fáciles
-│           ├── medium.json   3 niveles medios
-│           ├── hard.json     2 niveles difíciles
-│           └── expert.json   2 niveles expertos
+│       └── levels/           10 niveles JSON
+│           ├── easy.json     3 niveles (wood theme)
+│           ├── medium.json   3 niveles (bronze theme)
+│           ├── hard.json     2 niveles (silver theme)
+│           └── expert.json   2 niveles (gold theme)
 │
-├── 🧪 tests/                  Tests unitarios
-│   ├── moveEngine.test.ts    Tests del motor
-│   └── solver.test.ts        Tests del solver
+├── 🧪 tests/                  Tests (9/9 ✅)
+│   ├── moveEngine.test.ts    Motor de movimiento
+│   └── solver.test.ts        Solver BFS
 │
 ├── 📦 Configuración
-│   ├── package.json          Dependencias
-│   ├── tsconfig.json         TypeScript config
-│   ├── app.json              Expo config
-│   ├── babel.config.js       Babel + Reanimated
-│   └── vitest.config.ts      Config de tests
+│   ├── package.json          Expo SDK 54 + deps
+│   ├── tsconfig.json         TypeScript strict
+│   ├── app.json              Expo config iOS/Android
+│   ├── babel.config.js       Reanimated plugin
+│   └── vitest.config.ts      Testing setup
 │
-└── 📄 Documentación
-    ├── README.md             Documentación general
-    └── COMO-EJECUTAR.md      Guía de ejecución
+└── 📄 Docs
+    ├── README.md             Overview del proyecto
+    └── RESUMEN-PROYECTO.md   Este archivo
 ```
 
 ---
@@ -161,77 +203,208 @@ ParkingPuzzle/
 - **Líneas de código**: ~2,500+
 - **Componentes**: 5
 - **Pantallas**: 4
-- **Niveles**: 10
+
+---
+
+## 📊 Estadísticas del Proyecto
+
+- **Archivos**: 50+ archivos TypeScript/JSON/PNG
+- **Líneas de código**: ~11,728 (primer commit)
+- **Componentes**: 7 (Screen, Button, Card, Grid, Vehicle, StarRating, DailyObjectives)
+- **Pantallas**: 4 (index, play, levels, settings)
+- **Niveles**: 10 (4 dificultades)
 - **Tests**: 9 (todos ✅)
-- **Dependencias**: 938 paquetes
-- **Tiempo de desarrollo**: ~30 minutos
+- **Dependencias**: 938 paquetes npm
+- **Repositorio Git**: https://github.com/alexxvives/ParkingPuzzle.git
 
 ---
 
-## 🚀 Próximos Pasos Sugeridos
+## 🎮 CÓMO PROBAR LA APP
 
-### Corto Plazo (1-2 horas)
-1. **Implementar drag & drop** en `Vehicle.tsx`
-2. **Conectar AsyncStorage** para guardar progreso
-3. **Añadir animaciones** al mover vehículos
-4. **Agregar confetti** al completar nivel
-
-### Medio Plazo (1 día)
-1. **Sistema de hints** usando el solver
-2. **Collections** desbloqueables
-3. **Más niveles** (hasta 50+)
-4. **Sonidos y música**
-
-### Largo Plazo (1 semana)
-1. **Daily Puzzle** con backend
-2. **Leaderboards** con Supabase/Firebase
-3. **Editor de niveles**
-4. **Multiplayer/Challenges**
-
----
-
-## 🎨 Personalización
-
-### Cambiar Colores
-Edita `src/theme/colors.ts`:
-```typescript
-primary: '#TU_COLOR_AQUI',
-```
-
-### Añadir Niveles
-Crea JSON en `src/data/levels/`:
-```json
-{
-  "id": "new_level",
-  "size": 6,
-  "exit": { "x": 5, "y": 2 },
-  "vehicles": [...]
-}
-```
-
-### Cambiar Bundle ID
-Edita `app.json`:
-```json
-"bundleIdentifier": "com.tunombre.parkingpuzzle"
-```
-
----
-
-## 📱 Publicación en Stores
-
-### Apple App Store
+### Método 1: Expo Go (Recomendado para desarrollo)
 ```powershell
-# Instalar EAS
-npm install -g eas-cli
+# 1. Iniciar servidor Expo
+pnpm start
 
-# Build
+# 2. Escanear QR con Expo Go en tu iPhone
+```
+
+### Método 2: Build nativo
+```powershell
+# iOS (requiere Mac + Xcode)
+pnpm run ios
+
+# Android (requiere Android Studio)
+pnpm run android
+```
+
+---
+
+## 🎨 Sistema de Diseño
+
+### Paleta de Colores
+```typescript
+primary: '#2E9BFF'      // Azul Nonogram
+background: '#F5F6F8'   // Gris claro
+text: '#1A1D29'         // Negro suave
+stars: '#FFD700'        // Dorado
+
+// Temas de Grid
+wood: '#D4A574'         // Easy (madera)
+bronze: '#CD7F32'       // Medium (bronce)
+silver: '#C0C0C0'       // Hard (plata)
+gold: '#FFD700'         // Expert (oro)
+```
+
+### Tipografía
+- **Títulos**: System Bold, 32px
+- **Subtítulos**: System Semibold, 20px
+- **Body**: System Regular, 16px
+- **Labels**: System Medium, 14px (uppercase)
+
+---
+
+## 🔧 Comandos Útiles
+
+```powershell
+# Desarrollo
+pnpm start              # Iniciar Expo Dev Server
+pnpm run ios            # Abrir en iOS Simulator
+pnpm run android        # Abrir en Android Emulator
+
+# Testing
+pnpm test               # Ejecutar tests (Vitest)
+pnpm run typecheck      # Verificar TypeScript
+
+# Git
+git status              # Ver cambios
+git add .               # Agregar todos los archivos
+git commit -m "msg"     # Hacer commit
+git push                # Subir a GitHub
+
+# Limpiar caché (si hay errores)
+pnpm start --clear      # Limpiar caché de Expo
+```
+
+---
+
+## 📱 Publicación en Stores (Futuro)
+
+### Preparación
+1. **Crear cuenta de desarrollador**:
+   - Apple: $99/año - https://developer.apple.com
+   - Google: $25 único - https://play.google.com/console
+
+2. **Configurar EAS Build**:
+```powershell
+npm install -g eas-cli
+eas login
+eas build:configure
+```
+
+3. **Build para producción**:
+```powershell
+# iOS
 eas build --platform ios
 
-# Submit
-eas submit --platform ios
+# Android  
+eas build --platform android
 ```
 
 ### Google Play Store
+```powershell
+eas submit --platform android
+```
+
+---
+
+**¡Proyecto actualizado con UI premium minimalista! 🎨✨**4. **Submit a las stores**:
+```powershell
+eas submit --platform ios
+eas submit --platform android
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Error: "Port 8081 already in use"
+```powershell
+# Solución: Usar otro puerto
+pnpm start -- --port 8082
+```
+
+### Error: "Module not found"
+```powershell
+# Limpiar caché y reinstalar
+rm -rf node_modules
+pnpm install
+pnpm start --clear
+```
+
+### Error: Git push rechazado
+```powershell
+# Verificar configuración
+git config user.name
+git config user.email
+
+# Reconfigurar si es necesario
+git config user.name "Tu Nombre"
+git config user.email "tu@email.com"
+```
+
+---
+
+## 📝 Notas Técnicas
+
+### Colisión en Tiempo Real
+El sistema de detección de colisiones usa `useMemo` para recalcular límites cuando cualquier vehículo se mueve:
+```typescript
+const maxMovement = useMemo(() => {
+  return calculateMaxMovement(vehicle, allVehicles);
+}, [allVehicles]); // Recalcula cuando allVehicles cambia
+```
+
+### Themed Grids
+Cada dificultad tiene su propio gradiente LinearGradient:
+```typescript
+const THEME_COLORS = {
+  easy: { background: ['#D4A574', '#B8956A'] },    // Wood
+  medium: { background: ['#CD7F32', '#B87333'] },  // Bronze
+  hard: { background: ['#C0C0C0', '#A8A8A8'] },    // Silver
+  expert: { background: ['#FFD700', '#FFC700'] },  // Gold
+};
+```
+
+### Star Calculation
+```typescript
+// 3 estrellas: ≤ óptimo + 20%
+if (currentMoves <= Math.ceil(optimalMoves * 1.2)) return 3;
+
+// 2 estrellas: ≤ óptimo + 50%
+if (currentMoves <= Math.ceil(optimalMoves * 1.5)) return 2;
+
+// 1 estrella: cualquier completado
+return 1;
+```
+
+---
+
+## 🎯 Contribuir
+
+Si quieres agregar features:
+
+1. **Fork** el repositorio
+2. **Crea una rama**: `git checkout -b feature/nueva-feature`
+3. **Commit**: `git commit -m "Add: nueva feature"`
+4. **Push**: `git push origin feature/nueva-feature`
+5. **Pull Request** en GitHub
+
+---
+
+## 📄 Licencia
+
+Este proyecto es privado y está en desarrollo activo.
 ```powershell
 eas build --platform android
 eas submit --platform android
