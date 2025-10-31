@@ -21,6 +21,7 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
   const borderWidth = mmToDp(1.8);
   const exitLineLength = Math.max(12, Math.round(cellSize * 0.35));
   const exitLineThickness = mmToDp(1.8); // exact requested thickness
+  const cornerRadius = 16;
 
   return (
     <View
@@ -37,17 +38,17 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
       {/* Top border */}
       <View
         pointerEvents="none"
-        style={{ position: 'absolute', left: 0, top: 0, width: gridSize + borderWidth * 2, height: borderWidth, backgroundColor: BRAND_BLUE }}
+        style={{ position: 'absolute', left: 0, top: 0, width: gridSize + borderWidth * 2, height: borderWidth, backgroundColor: BRAND_BLUE, borderTopLeftRadius: cornerRadius, borderTopRightRadius: cornerRadius }}
       />
       {/* Left border */}
       <View
         pointerEvents="none"
-        style={{ position: 'absolute', left: 0, top: 0, width: borderWidth, height: gridSize + borderWidth * 2, backgroundColor: BRAND_BLUE }}
+        style={{ position: 'absolute', left: 0, top: 0, width: borderWidth, height: gridSize + borderWidth * 2, backgroundColor: BRAND_BLUE, borderTopLeftRadius: cornerRadius, borderBottomLeftRadius: cornerRadius }}
       />
       {/* Bottom border */}
       <View
         pointerEvents="none"
-        style={{ position: 'absolute', left: 0, bottom: 0, width: gridSize + borderWidth * 2, height: borderWidth, backgroundColor: BRAND_BLUE }}
+        style={{ position: 'absolute', left: 0, bottom: 0, width: gridSize + borderWidth * 2, height: borderWidth, backgroundColor: BRAND_BLUE, borderBottomLeftRadius: cornerRadius, borderBottomRightRadius: cornerRadius }}
       />
       {/* Right border split into two segments to create a white notch at exitY */}
       {typeof exitY === 'number' && exitY >= 0 && exitY < size ? (
@@ -55,12 +56,12 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
           {/* Right upper segment */}
           <View
             pointerEvents="none"
-            style={{ position: 'absolute', right: 0, top: 0, width: borderWidth, height: borderWidth + exitY * cellSize, backgroundColor: BRAND_BLUE }}
+            style={{ position: 'absolute', right: 0, top: 0, width: borderWidth, height: borderWidth + exitY * cellSize, backgroundColor: BRAND_BLUE, borderTopRightRadius: cornerRadius }}
           />
           {/* Right lower segment */}
           <View
             pointerEvents="none"
-            style={{ position: 'absolute', right: 0, top: borderWidth + (exitY + 1) * cellSize, width: borderWidth, height: gridSize + borderWidth * 2 - (borderWidth + (exitY + 1) * cellSize), backgroundColor: BRAND_BLUE }}
+            style={{ position: 'absolute', right: 0, top: borderWidth + (exitY + 1) * cellSize, width: borderWidth, height: gridSize + borderWidth * 2 - (borderWidth + (exitY + 1) * cellSize), backgroundColor: BRAND_BLUE, borderBottomRightRadius: cornerRadius }}
           />
 
           {/* Exit guide lines aligned exactly with the grid row borders */}
@@ -104,6 +105,8 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
           {
             width: gridSize,
             height: gridSize,
+            left: borderWidth,
+            top: borderWidth,
           },
         ]}
       >
