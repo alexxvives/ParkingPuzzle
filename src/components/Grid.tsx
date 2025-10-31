@@ -14,8 +14,10 @@ const BRAND_BLUE = '#2E9BFF';
 export function Grid({ size, cellSize = 50, difficulty = 'easy', children }: GridProps) {
   const gridSize = size * cellSize;
   
-  // 1 cm ≈ 63 dp (160 dp per inch, 1 cm = 0.3937 inches)
-  const borderWidth = 63;
+  // Convert millimeters to dp: 1 inch = 25.4 mm, baseline density = 160 dp/inch
+  const mmToDp = (mm: number) => Math.round((mm / 25.4) * 160);
+  // Requested: 10% thinner than 2 mm => 1.8 mm border width
+  const borderWidth = mmToDp(1.8);
 
   return (
     <View
