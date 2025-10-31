@@ -147,8 +147,8 @@ export default function PlayScreen() {
           {/* Game Board */}
           <View style={styles.gameArea}>
           {(() => {
-            const redCar = vehicles.find(v => v.type === 'red');
-            const exitY = redCar ? redCar.y : undefined;
+            // Use the level's declared exit Y to align the opening consistently
+            const exitY = level.exit?.y;
             return (
               <Grid size={level.size} cellSize={cellSize} difficulty={difficulty} exitY={exitY}>
                 {vehicles.map((vehicle) => (

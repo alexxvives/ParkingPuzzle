@@ -20,8 +20,7 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
   // Requested: 10% thinner than 2 mm => 1.8 mm border width
   const borderWidth = mmToDp(1.8);
   const exitLineLength = Math.max(12, Math.round(cellSize * 0.35));
-  const exitLineThickness = Math.max(2, Math.round(borderWidth * 0.3));
-  const exitLineYOffset = Math.round(cellSize * 0.1);
+  const exitLineThickness = mmToDp(1.8); // exact requested thickness
 
   return (
     <View
@@ -31,33 +30,46 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
           width: gridSize + borderWidth * 2,
           height: gridSize + borderWidth * 2,
           backgroundColor: '#FFFFFF',
-          borderColor: BRAND_BLUE,
-          borderWidth,
         },
       ]}
     >
-      {/* Exit notch on the right border aligned to exitY row */}
-      {typeof exitY === 'number' && exitY >= 0 && exitY < size && (
+      {/* Custom borders to allow a right-side gap (exit notch) */}
+      {/* Top border */}
+      <View
+        pointerEvents="none"
+        style={{ position: 'absolute', left: 0, top: 0, width: gridSize + borderWidth * 2, height: borderWidth, backgroundColor: BRAND_BLUE }}
+      />
+      {/* Left border */}
+      <View
+        pointerEvents="none"
+        style={{ position: 'absolute', left: 0, top: 0, width: borderWidth, height: gridSize + borderWidth * 2, backgroundColor: BRAND_BLUE }}
+      />
+      {/* Bottom border */}
+      <View
+        pointerEvents="none"
+        style={{ position: 'absolute', left: 0, bottom: 0, width: gridSize + borderWidth * 2, height: borderWidth, backgroundColor: BRAND_BLUE }}
+      />
+      {/* Right border split into two segments to create a white notch at exitY */}
+      {typeof exitY === 'number' && exitY >= 0 && exitY < size ? (
         <>
-          {/* Notch: white gap in the right border aligned to exit row */}
+          {/* Right upper segment */}
           <View
             pointerEvents="none"
-            style={{
-              position: 'absolute',
-              right: 0,
-              top: borderWidth + exitY * cellSize,
-              width: borderWidth,
-              height: cellSize,
-              backgroundColor: '#FFFFFF',
-            }}
+            style={{ position: 'absolute', right: 0, top: 0, width: borderWidth, height: borderWidth + exitY * cellSize, backgroundColor: BRAND_BLUE }}
           />
-          {/* Two small blue lines extending to the right from the notch corners */}
+          {/* Right lower segment */}
+          <View
+            pointerEvents="none"
+            style={{ position: 'absolute', right: 0, top: borderWidth + (exitY + 1) * cellSize, width: borderWidth, height: gridSize + borderWidth * 2 - (borderWidth + (exitY + 1) * cellSize), backgroundColor: BRAND_BLUE }}
+          />
+
+          {/* Exit guide lines aligned exactly with the grid row borders */}
           <View
             pointerEvents="none"
             style={{
               position: 'absolute',
               right: -exitLineLength,
-              top: borderWidth + exitY * cellSize - Math.round(exitLineThickness / 2) - exitLineYOffset,
+              top: borderWidth + exitY * cellSize - Math.round(exitLineThickness / 2),
               width: exitLineLength,
               height: exitLineThickness,
               backgroundColor: BRAND_BLUE,
@@ -69,7 +81,7 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
             style={{
               position: 'absolute',
               right: -exitLineLength,
-              top: borderWidth + (exitY + 1) * cellSize - Math.round(exitLineThickness / 2) - exitLineYOffset,
+              top: borderWidth + (exitY + 1) * cellSize - Math.round(exitLineThickness / 2),
               width: exitLineLength,
               height: exitLineThickness,
               backgroundColor: BRAND_BLUE,
@@ -77,6 +89,12 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
             }}
           />
         </>
+      ) : (
+        // Full right border if no exitY provided
+        <View
+          pointerEvents="none"
+          style={{ position: 'absolute', right: 0, top: 0, width: borderWidth, height: gridSize + borderWidth * 2, backgroundColor: BRAND_BLUE }}
+        />
       )}
 
       {/* Grid interior blanco */}
