@@ -19,6 +19,8 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
   const mmToDp = (mm: number) => Math.round((mm / 25.4) * 160);
   // Requested: 10% thinner than 2 mm => 1.8 mm border width
   const borderWidth = mmToDp(1.8);
+  const exitLineLength = Math.max(12, Math.round(cellSize * 0.35));
+  const exitLineThickness = Math.max(2, Math.round(borderWidth * 0.3));
 
   return (
     <View
@@ -35,17 +37,45 @@ export function Grid({ size, cellSize = 50, difficulty = 'easy', exitY, children
     >
       {/* Exit notch on the right border aligned to exitY row */}
       {typeof exitY === 'number' && exitY >= 0 && exitY < size && (
-        <View
-          pointerEvents="none"
-          style={{
-            position: 'absolute',
-            right: 0,
-            top: borderWidth + exitY * cellSize,
-            width: borderWidth,
-            height: cellSize,
-            backgroundColor: '#FFFFFF',
-          }}
-        />
+        <>
+          {/* Notch: white gap in the right border aligned to exit row */}
+          <View
+            pointerEvents="none"
+            style={{
+              position: 'absolute',
+              right: 0,
+              top: borderWidth + exitY * cellSize,
+              width: borderWidth,
+              height: cellSize,
+              backgroundColor: '#FFFFFF',
+            }}
+          />
+          {/* Two small blue lines extending to the right from the notch corners */}
+          <View
+            pointerEvents="none"
+            style={{
+              position: 'absolute',
+              right: -exitLineLength,
+              top: borderWidth + exitY * cellSize - Math.round(exitLineThickness / 2),
+              width: exitLineLength,
+              height: exitLineThickness,
+              backgroundColor: BRAND_BLUE,
+              borderRadius: exitLineThickness / 2,
+            }}
+          />
+          <View
+            pointerEvents="none"
+            style={{
+              position: 'absolute',
+              right: -exitLineLength,
+              top: borderWidth + (exitY + 1) * cellSize - Math.round(exitLineThickness / 2),
+              width: exitLineLength,
+              height: exitLineThickness,
+              backgroundColor: BRAND_BLUE,
+              borderRadius: exitLineThickness / 2,
+            }}
+          />
+        </>
       )}
 
       {/* Grid interior blanco */}
@@ -90,7 +120,7 @@ const styles = StyleSheet.create({
   outerContainer: {
     position: 'relative',
     borderRadius: 16,
-    overflow: 'hidden',
+    overflow: 'visible',
   },
   innerContainer: {
     position: 'absolute',
